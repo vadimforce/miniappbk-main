@@ -1,0 +1,44 @@
+@font-face {
+  font-family: "Flame";
+  src:
+    url("./fonts/Flame_Bold.woff") format("woff");
+  font-weight: 700;
+}
+@font-face {
+  font-family: "Flame";
+  src:
+    url("./fonts/Flame_Regular.woff") format("woff");
+  font-weight: 400;
+}
+@font-face {
+  font-family: "Rotonda";
+  src:
+    url("./fonts/Rotonda_Medium.woff") format("woff");
+  font-weight: 500;
+}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+html {
+  width: 390px;
+  height: 80px;
+  overflow: hidden;
+}
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
+}
