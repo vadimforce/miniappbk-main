@@ -19,9 +19,17 @@ export default function Activate() {
     return (
         <>
             <div className="w-[278px] text-[#1e1f1f] text-xl font-bold font-druk leading-tight mb-[10px] ">Загружай в&nbsp;наш чат селфи&#8209;фото с&nbsp;челобриком, открывай крутые ачивки и&nbsp;получай призы!</div>
-            <div className="w-[266px] h-10 text-[#1e1f1f] text-[16px]  font-medium leading-tight">Главное, чтобы на&nbsp;фотографии тебя с&nbsp;челобриком было хорошо видно!</div>
-            <div className="mt-[33px] grid items-center justify-center grid-cols-3 grid-rows-4 gap-x-[16px] gap-y-[14.5px] mb-[30px]">
-                <Image
+            <div className="w-[266px] h-10 text-[#1e1f1f]   font-medium leading-tight">Главное, чтобы на&nbsp;фотографии тебя с&nbsp;челобриком было хорошо видно!</div>
+            <ul className="mt-[33px] grid grid-cols-3 grid-rows-4 gap-x-[16px] gap-y-[14.5px] mb-[30px]">
+                <NameBrick className="row-span-2" name="МАРК" bg="#76CAE5" img={vlad} />
+                <NameBrick name="МАРК" bg="#52AE32" img={vlad} />
+                <NameBrick name="МАРК" bg="#76CAE5" img={vlad} />
+                <NameBrick name="МАРК" bg="#52AE32" img={mark} />
+                <NameBrick name="МАРК" bg="#52AE32" img={mark} />
+                <NameBrick name="МАРК" bg="#52AE32" img={mark} />
+                <NameBrick name="МАРК" bg="#52AE32" img={mark} />
+                <NameBrick name="МАРК" bg="#52AE32" img={mark} />
+                {/* <Image
                     src={vladking}
                     alt="vladking"
                     className="row-span-2 h-full"
@@ -66,7 +74,7 @@ export default function Activate() {
                     <Image
                         src={mark}
                         alt="mark"
-                    />
+                    /> 
                     <div className="absolute top-[74px] left-[22px] flex justify-center">
                         <svg width="68" height="32" viewBox="0 0 68 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M18.9769 0.81978L17.8845 15.5293L12.1548 13.8973L18.9769 0.81978Z" fill="white" />
@@ -74,8 +82,8 @@ export default function Activate() {
                         </svg>
                         <span className="absolute bottom-1.5 rotate-[-8deg] "><span className="font-druk font-bold text-[4.986px] text-center text-[#1e1f1f] leading-[5.783px]">МАРК</span></span>
                     </div>
-                </div>
-            </div >
+                </div> */}
+            </ul >
             <RedButton className="w-full">Загрузить фото</RedButton>
         </>
     )

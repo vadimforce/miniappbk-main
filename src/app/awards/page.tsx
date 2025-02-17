@@ -18,9 +18,9 @@ export default function Awards() {
                 <span>🎁 10 разных челобриков</span><br />
                 <span>доступ к розыгрышу крутого мерч-бокса с подарками от Влада А4!</span>
             </div>
-            <div className="bg-[#1E1F1F] px-[14] w-full h-[95px] rounded-lg text-[#FFCC1B]">
+            <div className="bg-[#1E1F1F] px-6 py-3.5 w-full  rounded-lg text-[#FFCC1B]">
                 <span className="">📱 iPhone 16</span><br />
-                <span className="text-[16px] leading-none">розыгрыш проходит среди всех участников, загрузивших хотя бы одного челобрика.</span>
+                <span className=" leading-none">розыгрыш проходит среди всех участников, загрузивших хотя бы одного челобрика.</span>
             </div>
             <Image
                 src={awardsImg}
