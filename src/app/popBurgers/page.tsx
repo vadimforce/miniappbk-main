@@ -49,10 +49,10 @@ export default function Home() {
         </div>
         <div className="-mx-10 w-[390px] mt-[90px] h-[17px] bg-[#d7c7b5]">
             <Image
-            src={vladbk}
-            alt="vladbk"
-            className="absolute top-[550px] left-[-32px] w-[169.85px] h-[147.54px]"
-        />
+                src={vladbk}
+                alt="vladbk"
+                className="absolute top-[550px] left-[-32px] w-[169.85px] h-[147.54px]"
+            />
         </div>
         <div className="-mx-10 w-[390px] h-32 bg-[#87604f]"></div>
     </div>

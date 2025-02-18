@@ -20,7 +20,7 @@ export default function Activate() {
             <ul className="mt-[33px] grid grid-cols-3 grid-rows-4 gap-x-[16px] gap-y-[14.5px] mb-[20px]">
                 <NameBrick className="row-span-2" name="КОРОЛЬ ВЛАД" bg="#FFCC1B" img={vladking} />
                 <NameBrick name="ВЛАД" bg="#76CAE5" img={vlad} />
-                <NameBrick name="РИВИ В&nbsp;БУРГЕР КИНГ" bg="#EA5045" img={rivi} />
+                <NameBrick name="РИВИ В&nbsp;БУРГЕР&nbsp;КИНГ" bg="#EA5045" img={rivi} />
                 <NameBrick name="РАБОТНИК ВЛАД" bg="#52AE32" img={vladworker} />
                 <NameBrick name="ВЛАД ПОЛИЦЕЙСКИЙ" bg="#FFCC1B" img={vladpoliceman} />
                 <NameBrick name="КЛОУН&#8209;А4" bg="#F28A3D" img={a4clown} />

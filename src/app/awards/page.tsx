@@ -7,9 +7,9 @@ export default function Awards() {
         </div>
         <div>
             <div className="mb-3 relative">
-                <svg className="rounded-lg"viewBox="0 0 298 326" xmlns="http://www.w3.org/2000/svg">
+                <svg className="rounded-lg" viewBox="0 0 298 326" xmlns="http://www.w3.org/2000/svg">
                     <path
-                        d="M0,24 a8,8 0 0 1 8,-8 a8,8 0 0 0 8,-8 a8,8 0 0 1 8,-8 h62 a8,8 0 0 1 8,8 a8,8 0 0 0 8,8 a8,8 0 0 0 8,-8 a8,8 0 0 1 8,-8 h62 a8,8 0 0 1 8,8 a8,8 0 0 0 8,8 a8,8 0 0 0 8,-8 a8,8 0 0 1 8,-8 h62 a8,8 0 0 1 8,8 a8,8 0 0 0 8,8 a8,8 0 0 1 8,8 v318 a8,8 0 0 1 -8,8 h-282 a8,8 0 0 1 -8,-8 z"fill="#FFCC1B" />
+                        d="M0,24 a8,8 0 0 1 8,-8 a8,8 0 0 0 8,-8 a8,8 0 0 1 8,-8 h62 a8,8 0 0 1 8,8 a8,8 0 0 0 8,8 a8,8 0 0 0 8,-8 a8,8 0 0 1 8,-8 h62 a8,8 0 0 1 8,8 a8,8 0 0 0 8,8 a8,8 0 0 0 8,-8 a8,8 0 0 1 8,-8 h62 a8,8 0 0 1 8,8 a8,8 0 0 0 8,8 a8,8 0 0 1 8,8 v318 a8,8 0 0 1 -8,8 h-282 a8,8 0 0 1 -8,-8 z" fill="#FFCC1B" />
                 </svg>
                 <div className="absolute top-[11px] leading-none px-[19px] py-4">
                     <div className="font-bold text-[20px]">🍔 1 челобрик </div>
