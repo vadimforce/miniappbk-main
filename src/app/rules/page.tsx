@@ -4,7 +4,7 @@ import rulesImg from '../images/rulesImg.png';
 
 export default function Rules() {
     return <>
-        <div className="text-xl font-bold font-druk leading-none mb-[15px] -ml-2.5">
+        <div className="text-xl font-bold font-druk leading-none mt-[-5px] mb-[15px] -ml-2.5">
             Выигрывай крутые призы, собирая челобриков из&nbsp;А4&#8209;Бокса!
         </div>
         <div className="font-medium leading-none mb-4">

@@ -1,21 +1,21 @@
 import { StaticImageData } from "next/image"
 import Image from "next/image"
 
-type NameBrickProps = {
+type AchievementsNameProps = {
   name: string,
   bg: string,
   img: StaticImageData,
   className?: string
 }
 
-const NameBrick = ({ name, bg, img, className = `` }: NameBrickProps) => {
+const AchievementsName = ({ name, bg, img, className = `` }: AchievementsNameProps) => {
   return <li className={`relative overflow-hidden rounded ${className}`}>
 <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
   <path
     d="M11,0 
        h32 
        a3,3 0 0 1 3,3
-	v5
+    v5
        a3,3 0 0 0 3,3
 h2
        a3,3 0 0 0 3,-3
@@ -23,7 +23,7 @@ v-5
        a3,3 0 0 1 3,-3
        h32 
        a3,3 0 0 1 3,3
-	v5
+    v5
        a3,3 0 0 0 3,3
 h2
        a3,3 0 0 1 3,3
@@ -57,4 +57,4 @@ v-5
       </div>
   </li>
 }
-export default NameBrick
+export default AchievementsName

@@ -15,6 +15,7 @@ export default {
       fontFamily: {
         sans: ['Rotonda', ...defaultTheme.fontFamily.sans],
         flame: ['Flame', ...defaultTheme.fontFamily.sans],
+        druk: ['DrukTextWide', ...defaultTheme.fontFamily.sans],
       }
     },
   },

@@ -16,6 +16,24 @@
     url("./fonts/Rotonda_Medium.woff") format("woff");
   font-weight: 500;
 }
+@font-face {
+  font-family: "Rotonda";
+  src:
+    url("./fonts/Rotonda_Bold.woff") format("woff");
+  font-weight: 700;
+}
+@font-face {
+  font-family: "DrukTextWide";
+  src:
+    url("./fonts/DrukTextWide_Bold.woff") format("woff");
+  font-weight: 700;
+}
+@font-face {
+  font-family: "DrukTextWide";
+  src:
+    url("./fonts/DrukTextWide_Medium.woff") format("woff");
+  font-weight: 500;
+}
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

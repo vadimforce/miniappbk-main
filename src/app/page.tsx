@@ -12,7 +12,7 @@ export default function Home() {
         src={promo}
         alt="promo"
         className="relative" />
-      <div className="absolute inset-0 ml-10 mt-[208px] font-druk font-bold text-[20px] w-[216px] leading-none">Настроение чики&#8209;брики!</div>
+      <div className="absolute  left-[40px] top-[208px] font-druk font-bold text-[20px] w-[216px] leading-none">Настроение чики&#8209;брики!</div>
     </div>
     <div className="grid items-center justify-center grid-cols-2 grid-rows-4 gap-2.5 -mt-7">
       <Link href="/rules"><PrimaryButton className="w-full">Правила 📢</PrimaryButton></Link>
