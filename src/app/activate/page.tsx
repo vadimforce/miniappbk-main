@@ -1,5 +1,3 @@
-
-import Image from 'next/image';
 import RedButton from "../components/RedButton";
 import vladking from '../images/vladking.png'
 import vlad from '../images/vlad.png'

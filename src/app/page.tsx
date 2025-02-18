@@ -2,8 +2,6 @@ import Image from "next/image";
 import Link from 'next/link';
 import promo from './images/promo.png'
 import PrimaryButton from "./components/PrimaryButton";
-import OrangeButton from "./components/OrangeButton";
-
 
 export default function Home() {
   return <>

@@ -4,7 +4,7 @@ import { usePathname } from 'next/navigation';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 
-export default () => {
+const Header= () => {
 
     const router = useRouter()
     const pathname = usePathname()
@@ -42,3 +42,4 @@ export default () => {
         </div>
     </header>
 }
+export default Header
