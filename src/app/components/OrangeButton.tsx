@@ -6,7 +6,7 @@ type OrangeButtonProps = {
 };
 
  const OrangeButton = ({ children, className, ...props }: OrangeButtonProps) => {
-    return <button {...props} className={`font-flame font-regular bg-[#FFCC1B] hover:text-[#FFCC1B] hover:bg-[#502314] transition active:top-px relative rounded-lg px-3 py-4 h-16 flex justify-center items-center text-[#502314] mt-[10px] className="p-4  text-center text-[24px]   leading-tight items-center" ${className ?? ''}`}>
+    return <button {...props} className={`font-flame font-regular bg-[#FFCC1B] hover:text-[#FFCC1B] hover:bg-[#502314] transition active:top-px relative rounded-lg px-1 h-16 flex justify-center items-center text-[#502314] p-4  text-normal text-[24px] leading-none items-center" ${className ?? ''}`}>
         <span>{children}</span>
     </button>
 }

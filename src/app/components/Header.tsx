@@ -10,7 +10,7 @@ const Header= () => {
     const pathname = usePathname()
     console.log(pathname === '/')
 
-    return <header className={`bg-[#f5ebdc] h-[80px] py-5`}>
+    return <header className={`bg-[#f5ebdc] h-[80px] py-5 shrink-0` }>
         <div className="container">
             <div className="flex items-center justify-between gap-5">
                 <div className="flex items-center gap-5">

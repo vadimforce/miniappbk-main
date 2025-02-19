@@ -1,5 +1,4 @@
 import { StaticImageData } from "next/image"
-import Image from "next/image"
 
 type AchievementsNameProps = {
     name: string,
@@ -44,8 +43,8 @@ v-5
         <div className="pointer-events-none top-8 left-0 right-0 bottom-0 absolute " style={{ backgroundColor: bg }}>
         </div>
         <div className=" flex items-center justify-center top-0 left-0 right-0 bottom-0 absolute ">
-            <Image
-                src={img}
+            <img
+                src={img.src}
                 alt="" />
         </div>
         <div className="pointer-events-none top-15 left-0 right-0 bottom-0 absolute">

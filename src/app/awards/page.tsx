@@ -1,5 +1,5 @@
-import Image from 'next/image';
 import awardsImg from '../images/awardsImg.png';
+
 export default function Awards() {
     return <>
         <div className="w-[292px] text-[#1e1f1f] text-[20px] font-bold font-druk leading-none mb-5">
@@ -31,9 +31,9 @@ export default function Awards() {
                 <div className="font-bold text-[20px]">📱 iPhone 16</div>
                 <div className=" leading-none">розыгрыш проходит среди всех участников, загрузивших хотя бы одного челобрика.</div>
             </div>
-            <Image
-                src={awardsImg}
-                alt="awards"
+            <img
+                src={awardsImg.src}
+                alt=""
                 className="mt-[10px]"
             />
         </div>

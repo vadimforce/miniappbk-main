@@ -16,11 +16,13 @@ export default function RootLayout({
   return (
     <html lang="ru">
       <body
-        className={`font-sans text-[#1e1f1f] `}
+        className={`font-sans text-[#1e1f1f] bg-white`}
       >
-        <Header />
-        <div className="container py-5">
-          {children}
+        <div className=" min-w-[375px] max-w-[475px] mx-auto relative flex flex-col min-h-screen">
+          <Header />
+          <div className="container py-5 flex flex-col grow">
+            {children}
+          </div>
         </div>
       </body>
     </html>
