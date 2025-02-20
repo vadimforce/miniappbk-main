@@ -3,6 +3,7 @@ type PrimaryButtonProps = {
     children: React.ReactNode; // Use React.ReactNode for children
     className?: string;
     onClick?: React.MouseEventHandler<HTMLButtonElement>; // Use a specific function signature
+    disabled?:boolean
 };
 
  const PrimaryButton = ({ children, className, ...props }: PrimaryButtonProps) => {

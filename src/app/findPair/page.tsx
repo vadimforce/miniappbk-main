@@ -26,7 +26,7 @@ type Card = {
 // Уровни игры
 const levels = [
   { cards: 4, pairs: 2, cardsPerRow: 2 }, // Уровень 1
-  { cards: 8, pairs: 4, cardsPerRow: 2 }, // Уровень 2
+  { cards: 8, pairs: 4, cardsPerRow: 4 }, // Уровень 2
   { cards: 12, pairs: 6, cardsPerRow: 3 }, // Уровень 3
   { cards: 16, pairs: 8, cardsPerRow: 4 }, // Уровень 4
   { cards: 20, pairs: 10, cardsPerRow: 4 }, // Уровень 5
@@ -64,7 +64,7 @@ export default function Home() {
 
   // Создаем карточки для уровня
   const createCards = (level: number) => {
-    const {pairs: pairCount } = levels[level];
+    const { pairs: pairCount } = levels[level];
     const selectedImages = getRandomImages(pairCount); // Выбираем случайные картинки
     const pairs = [...selectedImages, ...selectedImages]; // Дублируем картинки для пар
     return pairs
@@ -129,7 +129,7 @@ export default function Home() {
           newCards[firstIndex].isOpen = false;
           newCards[secondIndex].isOpen = false;
           setCards(newCards);
-        }, 1000);
+        }, 300);
       }
 
       // Сбрасываем открытые карточки
@@ -141,7 +141,10 @@ export default function Home() {
       if (currentLevel === levels.length - 1) {
         setIsWin(true); // Последний уровень завершен
       } else {
-        setCurrentLevel((prev) => prev + 1); // Переход на следующий уровень
+        setTimeout(() => {
+          setCurrentLevel((prev) => prev + 1);
+        }, 500)
+        // Переход на следующий уровень
       }
     }
   };
@@ -164,23 +167,22 @@ export default function Home() {
     return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
   };
 
-    return <div className=" flex flex-col gap-8 pb-10 justify-between">
-        <div className="flex flex-col grow gap-8">
-            <div className="text-[#1e1f1f] text-center text-[20px] font-bold font-druk leading-none">
-                Найди двух<br />одинаковых<br />челобриков
-            </div>
-            <div
+  return <div className=" flex grow flex-col gap-8 pb-10 justify-between">
+    <div className="flex flex-col grow gap-8">
+      <div className="text-[#1e1f1f] text-center text-[20px] font-bold font-druk leading-none">
+        Найди двух<br />одинаковых<br />челобриков
+      </div>
+      <div
         className="grid items-center justify-center w-auto gap-4"
         style={{
-          gridTemplateColumns: `repeat(${levels[currentLevel].cardsPerRow}, 96px)`,
+          gridTemplateColumns: `repeat(${levels[currentLevel].cardsPerRow}, 1fr)`,
         }}
       >
         {cards.map((card, index) => (
-          <div 
+          <div
             key={card.id}
-            className={`w-24 h-24 cursor-pointer transition-transform duration-500 ease-in-out ${
-              card.isOpen || card.isMatched ? ' rotate-0' : ' rotate-y-180'
-            }`}
+            className={`w-full cursor-pointer transition-transform duration-500 ease-in-out ${card.isOpen || card.isMatched ? ' rotate-0' : ' rotate-y-180'
+              }`}
             onClick={() => handleCardClick(index)}
           >
             <img
@@ -190,17 +192,15 @@ export default function Home() {
                   : cardBack.src // Иначе показываем рубашку
               }
               alt=""
-              width={96}
-              height={96}
-              className="w-full h-full object-cover transition-opacity duration-300"
+              className="w-full object-cover transition-opacity duration-300"
             />
           </div>
         ))}
       </div>
 
-        </div>
-        <div>
-            
+    </div>
+    <div>
+
       {/* Сообщения */}
       {isWin && (
         <div className="text-[#1e1f1f] text-center text-[20px] font-bold font-druk leading-none">
@@ -219,11 +219,11 @@ export default function Home() {
         className="w-full mt-5">
         Начать заново
       </OrangeButton>
-        </div>
-        <div className=" grid items-center justify-center grid-cols-3 grid-rows-1 gap-x-4">
-            <div className="h-[60px] bg-[#f5ebdc] rounded-lg border-4 border-[#decaad] pt-3"><div className=" text-center text-[#1e1f1f] text-[10px] font-bold font-druk leading-none">Счет</div><div className=" text-center font-druk font-bold text-[17px]">{score}</div></div>
-            <div className="h-[60px] bg-[#f5ebdc] rounded-lg border-4 border-[#decaad] pt-3"><div className=" text-center text-[#1e1f1f] text-[10px] font-bold font-druk leading-none">Время</div><div className=" text-center font-druk font-bold text-[17px]">{formatTime(timeLeft)}</div></div>
-            <div className="h-[60px] bg-[#f5ebdc] rounded-lg border-4 border-[#decaad] pt-3"><div className=" text-center text-[#1e1f1f] text-[10px] font-bold font-druk leading-none">Уровень</div><div className=" text-center font-druk font-bold text-[17px]">{currentLevel+1}</div></div>
-        </div>
     </div>
+    <div className=" grid items-center justify-center grid-cols-3 grid-rows-1 gap-x-4">
+      <div className="h-[60px] bg-[#f5ebdc] rounded-lg border-4 border-[#decaad] pt-3"><div className=" text-center text-[#1e1f1f] text-[10px] font-bold font-druk leading-none">Счет</div><div className=" text-center font-druk font-bold text-[17px]">{score}</div></div>
+      <div className="h-[60px] bg-[#f5ebdc] rounded-lg border-4 border-[#decaad] pt-3"><div className=" text-center text-[#1e1f1f] text-[10px] font-bold font-druk leading-none">Время</div><div className=" text-center font-druk font-bold text-[17px]">{formatTime(timeLeft)}</div></div>
+      <div className="h-[60px] bg-[#f5ebdc] rounded-lg border-4 border-[#decaad] pt-3"><div className=" text-center text-[#1e1f1f] text-[10px] font-bold font-druk leading-none">Уровень</div><div className=" text-center font-druk font-bold text-[17px]">{currentLevel + 1}</div></div>
+    </div>
+  </div>
 }
