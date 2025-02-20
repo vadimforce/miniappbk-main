@@ -29,8 +29,6 @@ export default function Activate() {
     const video = useRef<HTMLVideoElement>(null)
     const canvas = useRef<HTMLCanvasElement>(null)
     const stream = useRef<MediaProvider>(null)
-    const initDataRef = useRef<string | null>(null)
-    const [initData, setInitData] = useState<string | null>(null);
     const [processSelfie, setProcessSelfie] = useState<boolean>(false)
     const [items, setItems] = useState<ChelobrickProps[]>([
         {
@@ -115,70 +113,10 @@ export default function Activate() {
         }
     ])
 
-    useEffect(() => {
-        initDataRef.current = initData;
-    }, [initData])
-
-
-    useEffect(() => {
-
-        const script = document.createElement("script");
-        script.src = "https://telegram.org/js/telegram-web-app.js";
-        script.async = true;
-        document.body.appendChild(script);
-
-        script.onload = () => {
-            console.log("Telegram WebApp SDK загружен");
-
-            if (window.Telegram?.WebApp) {
-                window.Telegram.WebApp.ready();
-
-                const tg = window.Telegram.WebApp;
-                tg.expand(); // Разворачиваем WebApp на весь экран
-                tg.enableClosingConfirmation(); // Включаем подтверждение выхода
-                setInitData(JSON.stringify(tg.initDataUnsafe));
-            }
-        };
-
-        const fetchData = async () => {
-            try {
-                const response = await fetch('https://a4-box.ru/profile/chelobriks', {
-                    method: "POST",
-                    headers: {
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        initData: initData
-                    })
-                });
-                const json = await response.json();
-                if (json.status === "Success") {
-                    setItems((prev) => {
-                        const c = [...prev]
-                        for (const item of c) {
-                            if (json.chelobriks.indexOf(item.match) > -1) {
-                                item.active = true
-                            }
-                        }
-                        return c
-                    })
-                }
-            } catch (error) {
-                console.error("Error:", error);
-            }
-        };
-
-        fetchData();
-
-        return () => {
-            document.body.removeChild(script);
-        };
-    }, [])
-
-
     const takeSelfie = async (e: React.MouseEvent<HTMLElement>) => {
         e.preventDefault()
+
+        setItems([])
 
         if (canvas.current && video.current) {
             const context = canvas.current.getContext('2d');
@@ -195,9 +133,8 @@ export default function Activate() {
                             'Content-Type': 'application/json'
                         },
                         body: JSON.stringify({
-                            initData: initDataRef.current,
                             photo: canvas.current.toDataURL('image/jpeg'),
-                            location: new URLSearchParams(window.location.search)
+                            initData: window.Telegram?.WebApp?.initData
                         })
                     });
                     const json = await response.json();
@@ -264,7 +201,6 @@ export default function Activate() {
 
     return (
         <div className="relative grow flex flex-col justify-between gap-4">
-            {initData}
             <div className="grow flex flex-col gap-4">
                 <div className="text-xl font-bold font-druk leading-none ">Загружай в&nbsp;наш чат селфи&#8209;фото с&nbsp;челобриком, открывай крутые ачивки и&nbsp;получай призы!</div>
                 <div className="font-medium leading-[120%]">Главное, чтобы на&nbsp;фотографии тебя с&nbsp;челобриком было хорошо видно!</div>

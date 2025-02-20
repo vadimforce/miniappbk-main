@@ -1,3 +1,5 @@
+'use client';
+
 import Link from 'next/link';
 import promo from './images/promo.png'
 import PrimaryButton from "./components/PrimaryButton";

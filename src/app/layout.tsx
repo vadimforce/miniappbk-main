@@ -1,17 +1,37 @@
-import type { Metadata } from "next";
+'use client';
+
 import "./globals.css";
 import Header from "./components/Header";
-
-export const metadata: Metadata = {
-  title: "Челобрики",
-  description: "Челобрики",
-};
+import { useEffect } from "react";
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
+  useEffect(() => {
+
+    const script = document.createElement("script");
+    script.src = "https://telegram.org/js/telegram-web-app.js";
+    script.async = true;
+    document.body.appendChild(script);
+
+    script.onload = () => {
+      console.log("Telegram WebApp SDK загружен");
+
+      if (window.Telegram?.WebApp) {
+        const tg = window.Telegram.WebApp;
+        tg.expand(); // Разворачиваем WebApp на весь экран
+        tg.enableClosingConfirmation(); // Включаем подтверждение выхода
+      }
+    };
+
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, [])
+
   return (
     <html lang="ru">
       <body
