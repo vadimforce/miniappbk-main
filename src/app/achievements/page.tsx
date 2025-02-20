@@ -38,7 +38,7 @@ export default function Achievments() {
                     setItems((prev) => {
                         const c = [...prev]
                         for (const item of c) {
-                            if (json.chelobriks.indexOf(item.match) > -1) {
+                            if (json.achivki.indexOf(item.match) > -1) {
                                 item.active = true
                             }
                         }
@@ -58,116 +58,117 @@ export default function Achievments() {
             bg: "#FFCC1B",
             img: ach1,
             active: false,
-            match: ""
+            match: "c1"
         },
         {
             name: "ПЕРВАЯ СЫГРАННАЯ МИНИ-ИГРА",
             bg: "#76CAE5",
             img: ach2,
             active: false,
-            match: ""
+            match: "g1"
         },
         {
-            name: "НАЙДЕН ЧЕЛОБРИК В КОРОНЕ",
+            name: "НАЙДЕН ЧЕЛОБРИК В&nbsp;КОРОНЕ",
             bg: "#FFCC1B",
             img: ach3,
             active: false,
-            match: ""
+            match: "crown"
         },
         {
             name: "3 СОБРАННЫХ ЧЕЛОБРИКА",
             bg: "#EA5045",
             img: ach4,
             active: false,
-            match: ""
+            match: "c3"
         },
         {
             name: "2 СЫГРАННЫХ МИНИ-ИГР",
             bg: "#52AE32",
             img: ach5,
             active: false,
-            match: ""
+            match: "g2"
         },
         {
             name: "5 СОБРАННЫХ ЧЕЛОБРИКОВ",
             bg: "#76CAE5",
             img: ach6,
             active: false,
-            match: ""
+            match: "c5"
         },
         {
             name: "СЕЛФИ НА КАНИКУЛАХ",
             bg: "#F28A3D",
             img: ach7,
             active: false,
-            match: ""
+            match: "s1"
         },
         {
             name: "СЕЛФИ В МАРТОВСКИЕ ПРАЗДНИКИ",
             bg: "#EA5045",
             img: ach8,
             active: false,
-            match: ""
+            match: "s2"
         },
         {
             name: "СЕЛФИ В ФЕВРАЛЬСКИЕ ПРАЗДНИКИ",
             bg: "#52AE32",
             img: ach9,
             active: false,
-            match: ""
+            match: "s3"
         },
         {
             name: "7 СОБРАННЫХ ЧЕЛОБРИКОВ",
             bg: "#76CAE5",
             img: ach10,
             active: false,
-            match: ""
+            match: "c7"
         },
         {
             name: "10 СОБРАННЫХ ЧЕЛОБРИКОВ",
             bg: "#F28A3D",
             img: ach11,
             active: false,
-            match: ""
+            match: "c10"
         },
         {
-            name: "СЕЛФИ В ПОСЛЕДНЮЮНЕДЕЛЮ АКЦИИ",
+            name: "СЕЛФИ В ПОСЛЕДНЮЮ НЕДЕЛЮ АКЦИИ",
             bg: "#FFCC1B",
             img: ach12,
             active: false,
-            match: ""
+            match: "s4"
         },
         {
             name: "ПРОЙДЕН ТЕСТ «КАКОЙ ТЫ ЧЕЛОБРИК?»",
             bg: "#52AE32",
             img: ach13,
             active: false,
-            match: ""
+            match: "test"
         },
         {
             name: "ВСЕ СОБРАННЫЕ АЧИВКИ",
             bg: "#FFCC1B",
             img: ach14,
             active: false,
-            match: ""
+            match: "all"
         }
     ])
 
-    return (<>
-        <div className="font-druk font-bold text-[20px] leading-none text-[#000000] mix-blend-normal mb-5">
-            Ачивки
+    return <div className="grow flex flex-col gap-4 justify-between">
+        <div className="grow flex flex-col gap-4">
+            <div className="font-druk font-bold text-[20px] leading-none">
+                Ачивки
+            </div>
+            <ul className="pb-6 grid grid-cols-3 grid-rows-4 gap-x-4 gap-y-[15px]">
+                {items.map((item, index) => <AchievementsName
+                    key={index}
+                    name={item.name}
+                    bg={item.bg}
+                    img={item.img}
+                    active={item.active}
+                />
+                )}
+            </ul >
         </div>
-        <ul className="mt-[35px] grid grid-cols-3 grid-rows-4 gap-x-[16px] gap-y-[14.5px] mb-[20px]">
-            {items.map((item, index) => <AchievementsName
-                key={index}
-                name={item.name}
-                bg={item.bg}
-                img={item.img}
-                active={item.active}
-            />
-            )}
-        </ul >
-        <RedButton className="mt-[55px] w-full">Поделиться</RedButton>
-    </>
-    )
+        <RedButton className="w-full">Поделиться</RedButton>
+    </div>
 }

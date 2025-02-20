@@ -12,7 +12,7 @@ import lamason from '../images/lamason.png'
 import vladprison from '../images/vladprison.png'
 import mark from '../images/mark.png'
 import NameBrick from '../components/NameBrick';
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { StaticImageData } from "next/image";
 
 type ChelobrickProps = {
@@ -25,7 +25,7 @@ type ChelobrickProps = {
 }
 
 export default function Activate() {
-
+    const video = useRef<HTMLVideoElement>(null)
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -48,7 +48,7 @@ export default function Activate() {
         };
         fetchData();
     }, [])
-
+    const [processSelfie, setProcessSelfie] = useState<boolean>(false)
     const [items, setItems] = useState<ChelobrickProps[]>([
         {
             rows: 2,
@@ -131,23 +131,74 @@ export default function Activate() {
             match: "Марк!"
         }
     ])
+    const takeSelfie = (e: React.MouseEvent<HTMLElement>) => {
+        e.preventDefault()
+        setProcessSelfie(false)
+
+    }
+    const removeStream = () => {
+        if (video.current && video.current.srcObject) {
+            const tracks = (video.current.srcObject as MediaStream).getTracks();
+            tracks.forEach((track) => {
+                track.stop()
+            });
+            video.current.srcObject = null;
+        }
+    }
+
+    const setCamera = async () => {
+        removeStream();
+        try {
+            const stream = await navigator.mediaDevices.getUserMedia({
+                video: {
+                    facingMode: "user"
+                }
+            })
+            if (video.current) {
+                video.current.srcObject = stream;
+                video.current.play();
+            }
+        } catch (error) {
+            console.error(error)
+        } finally {
+
+        }
+    }
+    useEffect(() => {
+        if (processSelfie) setCamera()
+        else removeStream()
+        return () => {
+            removeStream()
+        }
+    }, [processSelfie])
 
     return (
-        <>
-            <div className="w-[278px] text-[#1e1f1f] text-xl font-bold font-druk leading-none mb-[10px] ">Загружай в&nbsp;наш чат селфи&#8209;фото с&nbsp;челобриком, открывай крутые ачивки и&nbsp;получай призы!</div>
-            <div className="w-[266px] h-10 text-[#1e1f1f] font-medium leading-tight">Главное, чтобы на&nbsp;фотографии тебя с&nbsp;челобриком было хорошо видно!</div>
-            <ul className="mt-[33px] grid grid-cols-3 grid-rows-4 gap-x-[16px] gap-y-[14.5px] mb-[20px]">
-                {items.map((item, index) => <NameBrick
-                    key={index}
-                    rows={item.rows}
-                    name={item.name}
-                    bg={item.bg}
-                    img={item.img}
-                    active={item.active}
-                />
-                )}
-            </ul >
-            <RedButton className="w-full">Загрузить фото</RedButton>
-        </>
+        <div className="relative grow flex flex-col justify-between gap-4">
+            <div className="grow flex flex-col gap-4">
+                <div className="text-xl font-bold font-druk leading-none ">Загружай в&nbsp;наш чат селфи&#8209;фото с&nbsp;челобриком, открывай крутые ачивки и&nbsp;получай призы!</div>
+                <div className="font-medium leading-[120%]">Главное, чтобы на&nbsp;фотографии тебя с&nbsp;челобриком было хорошо видно!</div>
+                <ul className="grid grid-cols-3 grid-rows-4 gap-x-4 gap-y-[15px] pb-3">
+                    {items.map((item, index) => <NameBrick
+                        key={index}
+                        rows={item.rows}
+                        name={item.name}
+                        bg={item.bg}
+                        img={item.img}
+                        active={item.active}
+                    />
+                    )}
+                </ul >
+            </div>
+            <RedButton className="w-full" onClick={e => {
+                e.preventDefault()
+                setProcessSelfie(true)
+            }}>Загрузить фото</RedButton>
+            {processSelfie ? <div className="fixed inset-0">
+                <video ref={video} className="bg-black w-full h-full"></video>
+                <button className="absolute bottom-4 left-1/2 -translate-x-1/2 w-[59px] h-[59px] shrink-0 flex items-center justify-center rounded-full border-4 border-white" onClick={e => takeSelfie(e)}>
+                    <div className="w-[45px] h-[45px] bg-white rounded-full border-4"></div>
+                </button>
+            </div> : <></>}
+        </div>
     )
 }

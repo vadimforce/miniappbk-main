@@ -1,4 +1,6 @@
 import { StaticImageData } from "next/image"
+import parse from 'html-react-parser';
+
 
 type AchievementsNameProps = {
     name: string,
@@ -27,7 +29,7 @@ const AchievementsName = ({ name, bg, img, className = ``, active }: Achievement
                 <path d="M20.5406 1.61627L17.4886 16.0471L12.029 13.6627L20.5406 1.61627Z" fill="white" />
                 <rect x="0.938599" y="12.0874" width="65.108" height="18.042" rx="1.17665" fill="white" />
             </svg>
-            <span className="px-1 h-[10px] font-druk absolute text-center font-bold text-[#1e1f1f] text-[6px] leading-none left-0 right-0 bottom-1" style={{ color: active === false ? `#DECBAE` : "#1E1F1F" }}>{name}</span>
+            <span className="px-1 h-[10px] font-druk absolute text-center font-bold text-[#1e1f1f] text-[6px] leading-none left-0 right-0 bottom-1" style={{ color: active === false ? `#DECBAE` : "#1E1F1F" }}>{parse(name??"")}</span>
         </div>
     </li>
 }
