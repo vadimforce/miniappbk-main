@@ -13,6 +13,7 @@ declare global {
                         username?: string;
                     };
                 };
+                ready: () => void;
                 expand: () => void;
                 close: () => void;
                 enableClosingConfirmation: () => void;

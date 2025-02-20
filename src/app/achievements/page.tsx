@@ -32,7 +32,13 @@ export default function Achievments() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch('http://31.31.207.54:2228/profile/achivki', { method: "POST", });
+                const response = await fetch('https://a4-box.ru/profile/achivki', {
+                    method: "POST",
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                });
                 const json = await response.json();
                 if (json.status === "Success") {
                     setItems((prev) => {
