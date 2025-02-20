@@ -56,6 +56,11 @@ export default function Home() {
   const [timeLeft, setTimeLeft] = useState(60); // Таймер
   const [isGameOver, setIsGameOver] = useState(false); // Конец игры
 
+  useEffect(() => {
+    if (isWin === true) {
+      // отправляем ачивку game
+    }
+  }, [isWin])
   // Выбираем случайные картинки для уровня
   const getRandomImages = (count: number) => {
     const shuffled = allImages.sort(() => Math.random() - 0.5); // Перемешиваем массив
