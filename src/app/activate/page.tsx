@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import RedButton from "../components/RedButton";
 import vladking from '../images/vladking.png'
@@ -14,6 +14,8 @@ import mark from '../images/mark.png'
 import NameBrick from '../components/NameBrick';
 import { useEffect, useRef, useState } from "react";
 import { StaticImageData } from "next/image";
+import "@telegram-apps/sdk"
+import Script from "next/script";
 
 type ChelobrickProps = {
     name: string
@@ -25,11 +27,32 @@ type ChelobrickProps = {
 }
 
 export default function Activate() {
+
     const video = useRef<HTMLVideoElement>(null)
+    const canvas = useRef<HTMLCanvasElement>(null)
+    const stream = useRef<MediaProvider>(null)
+    const [initData, setInitData] = useState<any | null>(null);
+
     useEffect(() => {
+
+        if (window.Telegram?.WebApp) {
+            const tg = window.Telegram.WebApp;
+            tg.expand(); // Разворачиваем WebApp на весь экран
+            tg.enableClosingConfirmation(); // Включаем подтверждение выхода
+
+            if (tg.initData) {
+                setInitData(tg.initData);
+            }
+        }
+
         const fetchData = async () => {
             try {
-                const response = await fetch('https://a4-box.ru/profile/chelobriks', { method: "POST", });
+                const response = await fetch('http://31.31.207.54:2228/profile/chelobriks', {
+                    method: "POST",
+                    body: JSON.stringify({
+                        initData: initData
+                    })
+                });
                 const json = await response.json();
                 if (json.status === "Success") {
                     setItems((prev) => {
@@ -131,8 +154,43 @@ export default function Activate() {
             match: "Марк!"
         }
     ])
-    const takeSelfie = (e: React.MouseEvent<HTMLElement>) => {
+    const takeSelfie = async (e: React.MouseEvent<HTMLElement>) => {
         e.preventDefault()
+
+        if (canvas.current && video.current) {
+            const context = canvas.current.getContext('2d');
+            canvas.current.width = video.current.videoWidth;
+            canvas.current.height = video.current.videoHeight;
+            if (context) {
+                context.drawImage(video.current, 0, 0, canvas.current.width, canvas.current.height);
+                video.current.pause();
+
+
+                try {
+                    const response = await fetch('http://31.31.207.54:2228/profile/photo', {
+                        method: "POST",
+                        body: canvas.current.toDataURL('image/jpeg')
+                    });
+                    const json = await response.json();
+                    console.log(json)
+                    // if (json.status === "Success") {
+                    //     setItems((prev) => {
+                    //         const c = [...prev]
+                    //         for (const item of c) {
+                    //             if (json.chelobriks.indexOf(item.match) > -1) {
+                    //                 item.active = true
+                    //             }
+                    //         }
+                    //         return c
+                    //     })
+                    // }
+                } catch (error) {
+                    console.error("Error:", error);
+                }
+
+            }
+        }
+
         setProcessSelfie(false)
 
     }
@@ -143,19 +201,20 @@ export default function Activate() {
                 track.stop()
             });
             video.current.srcObject = null;
+            stream.current = null;
         }
     }
 
     const setCamera = async () => {
         removeStream();
         try {
-            const stream = await navigator.mediaDevices.getUserMedia({
+            stream.current = await navigator.mediaDevices.getUserMedia({
                 video: {
                     facingMode: "user"
                 }
             })
             if (video.current) {
-                video.current.srcObject = stream;
+                video.current.srcObject = stream.current;
                 video.current.play();
             }
         } catch (error) {
@@ -164,6 +223,7 @@ export default function Activate() {
 
         }
     }
+
     useEffect(() => {
         if (processSelfie) setCamera()
         else removeStream()
@@ -174,6 +234,10 @@ export default function Activate() {
 
     return (
         <div className="relative grow flex flex-col justify-between gap-4">
+            <Script
+                src="https://telegram.org/js/telegram-web-app.js"
+                strategy="beforeInteractive"
+            />
             <div className="grow flex flex-col gap-4">
                 <div className="text-xl font-bold font-druk leading-none ">Загружай в&nbsp;наш чат селфи&#8209;фото с&nbsp;челобриком, открывай крутые ачивки и&nbsp;получай призы!</div>
                 <div className="font-medium leading-[120%]">Главное, чтобы на&nbsp;фотографии тебя с&nbsp;челобриком было хорошо видно!</div>
@@ -193,12 +257,13 @@ export default function Activate() {
                 e.preventDefault()
                 setProcessSelfie(true)
             }}>Загрузить фото</RedButton>
-            {processSelfie ? <div className="fixed inset-0">
+            <div className={`fixed inset-0 ${processSelfie ? `` : `hidden`}`}>
                 <video ref={video} className="bg-black w-full h-full"></video>
+                <canvas ref={canvas} className="hidden" ></canvas>
                 <button className="absolute bottom-4 left-1/2 -translate-x-1/2 w-[59px] h-[59px] shrink-0 flex items-center justify-center rounded-full border-4 border-white" onClick={e => takeSelfie(e)}>
                     <div className="w-[45px] h-[45px] bg-white rounded-full border-4"></div>
                 </button>
-            </div> : <></>}
+            </div>
         </div>
     )
 }

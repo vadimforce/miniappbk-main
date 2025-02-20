@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Header from "./components/Header";
+import Script from "next/script";
 
 
 export const metadata: Metadata = {
