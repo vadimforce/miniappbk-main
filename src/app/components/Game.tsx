@@ -170,6 +170,7 @@ const GameCanvas = () => {
         }
     }, [score])
     // Проверка на проигрыш
+
     useEffect(() => {
         if (lives <= 0) {
             gameOver();
@@ -205,7 +206,8 @@ const GameCanvas = () => {
 
     // Таймер обратного отсчета
     useEffect(() => {
-        if (timeLeft <= 0) return;
+        if (timeLeft <= 0)
+            gameOver("lose");
 
         const timerInterval = setInterval(() => {
             setTimeLeft((prevTime) => Math.max(0, prevTime - 1));
