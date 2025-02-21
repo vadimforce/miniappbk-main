@@ -1,6 +1,6 @@
 'use client'
 
-import RedButton from "../components/RedButton";
+// import RedButton from "../components/RedButton";
 import ach1 from '../images/Achievements/ach1.png'
 import ach2 from '../images/Achievements/ach2.png'
 import ach3 from '../images/Achievements/ach3.png'
@@ -32,7 +32,7 @@ import ach14Close from '../images/Achievements/ach14Close.png'
 import AchievementsName from '../components/AchievementsName';
 import { useEffect, useState } from "react";
 import { StaticImageData } from "next/image";
-import Link from "next/link";
+// import Link from "next/link";
 
 
 type AchievementsProps = {
@@ -210,6 +210,6 @@ export default function Achievments() {
                 )}
             </ul >
         </div>
-        <Link href={`https://t.me/share/url?text=${encodeURI(`Я уже начал собирать ачивки с челобриками, присоединяйся ко мне: https://t.me/A4Box_bot`)}`} target="_blank"><RedButton className="w-full">Поделиться</RedButton></Link>
+        {/* <Link href={`https://t.me/share/url?text=${encodeURI(`Я уже начал собирать ачивки с челобриками, присоединяйся ко мне: https://t.me/A4Box_bot`)}`} target="_blank"><RedButton className="w-full">Поделиться</RedButton></Link> */}
     </div>
 }

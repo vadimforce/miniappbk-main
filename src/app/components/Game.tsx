@@ -58,7 +58,7 @@ const GameCanvas = () => {
                 y: 0,
                 size: 100,
                 type: isFood ? "food" : "trash",
-                speed: 0.5 + level.current * 0.4,
+                speed: 0.5 + level.current * 0.8,
                 direction: Math.random() > 0.5 ? 0.5 : -0.5,
                 image: null,
             };
@@ -177,17 +177,17 @@ const GameCanvas = () => {
     }, [lives])
     // Завершение игры
     const gameOver = (result?: "win" | "lose") => {
-        if(result==="win"){
+        if (result === "win") {
             fetch('https://a4-box.ru/profile/game2', {
                 method: "POST",
                 headers: {
-                  'Accept': 'application/json',
-                  'Content-Type': 'application/json'
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                  initData: window.Telegram?.WebApp?.initData
+                    initData: window.Telegram?.WebApp?.initData
                 })
-              });
+            });
         }
         router.push(result === "win" ? "/win2" : "/gameover2")
     };
@@ -222,6 +222,7 @@ const GameCanvas = () => {
     };
 
     useEffect(() => {
+
         if (!canvasRef.current) return;
 
         const ctx = canvasRef.current.getContext("2d");
@@ -253,10 +254,10 @@ const GameCanvas = () => {
                         <div className="text-center text-[#1e1f1f] text-[10px] font-bold font-druk leading-none">Счет</div>
                         <div className="text-center font-druk font-bold text-[17px]">{score}</div>
                         <img
-                    src={vladbk.src}
-                    alt=""
-                    className="absolute max-w-none w-[169px] h-[147px] bottom-full mb-3 -left-3 pointer-events-none"
-                />
+                            src={vladbk.src}
+                            alt=""
+                            className="absolute max-w-none w-[169px] h-[147px] bottom-full mb-3 -left-3 pointer-events-none"
+                        />
                     </div>
                     <div className="h-[60px] bg-[#f5ebdc] rounded-lg border-4 border-[#decaad] pt-3 flex-1 max-w-[150px]">
                         <div className="text-center text-[#1e1f1f] text-[10px] font-bold font-druk leading-none">Время</div>
