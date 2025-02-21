@@ -14,6 +14,7 @@ import mark from '../images/mark.png'
 import NameBrick from '../components/NameBrick';
 import { useEffect, useRef, useState } from "react";
 import { StaticImageData } from "next/image";
+import { useRouter } from "next/navigation";
 
 type ChelobrickProps = {
     name: string
@@ -25,6 +26,8 @@ type ChelobrickProps = {
 }
 
 export default function Activate() {
+
+    const router = useRouter();
 
     const video = useRef<HTMLVideoElement>(null)
     const canvas = useRef<HTMLCanvasElement>(null)
@@ -113,11 +116,80 @@ export default function Activate() {
         }
     ])
 
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await fetch('https://a4-box.ru/profile/chelobriks', {
+                    method: "POST",
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        initData: window.Telegram?.WebApp?.initData
+                    })
+                });
+                const json = await response.json();
+                if (json.status === "Success") {
+                    setItems((prev) => {
+                        const c = [...prev]
+                        for (const item of c) {
+                            if (json.chelobriks.indexOf(item.match) > -1) {
+                                item.active = true
+                            }
+                        }
+                        return c
+                    })
+                }
+            } catch (error) {
+                console.error("Error:", error);
+            }
+        };
+        fetchData();
+        return () => {
+            setProcessSelfie(false)
+        };
+    }, [])
+
+    // Функция для отрисовки видео на canvas
+    function drawVideo() {
+        if (canvas.current && video.current) {
+            canvas.current.width = video.current.videoWidth;
+            canvas.current.height = video.current.videoHeight;
+            const context = canvas.current.getContext('2d');
+            const sizeVideo = {
+                x: 0, y: 0
+            }
+            if (video.current.videoWidth > video.current.videoHeight) {
+                if (video.current.clientWidth > video.current.clientHeight) {
+                    sizeVideo.x = canvas.current.width;
+                    sizeVideo.y = sizeVideo.x * video.current.videoHeight / video.current.videoWidth;
+                } else {
+                    sizeVideo.y = canvas.current.height;
+                    sizeVideo.x = sizeVideo.y * video.current.videoWidth / video.current.videoHeight;
+                }
+            } else {
+                if (video.current.clientWidth > video.current.clientHeight) {
+                    sizeVideo.x = canvas.current.width;
+                    sizeVideo.y = sizeVideo.x * video.current.videoHeight / video.current.videoWidth;
+                } else {
+                    sizeVideo.y = canvas.current.height;
+                    sizeVideo.x = sizeVideo.y * video.current.videoWidth / video.current.videoHeight;
+                }
+            }
+
+            if (context) {
+                context.save();
+                context.scale(-1, 1);
+                context.drawImage(video.current, - sizeVideo.x - (canvas.current.width - sizeVideo.x) / 2, (canvas.current.height - sizeVideo.y) / 2, sizeVideo.x, sizeVideo.y);
+                context.restore();
+            }
+            requestAnimationFrame(drawVideo);
+        }
+    }
+
     const takeSelfie = async (e: React.MouseEvent<HTMLElement>) => {
         e.preventDefault()
-
-        setItems([])
-
         if (canvas.current && video.current) {
             const context = canvas.current.getContext('2d');
             canvas.current.width = video.current.videoWidth;
@@ -138,27 +210,16 @@ export default function Activate() {
                         })
                     });
                     const json = await response.json();
-                    console.log(json)
-                    // if (json.status === "Success") {
-                    //     setItems((prev) => {
-                    //         const c = [...prev]
-                    //         for (const item of c) {
-                    //             if (json.chelobriks.indexOf(item.match) > -1) {
-                    //                 item.active = true
-                    //             }
-                    //         }
-                    //         return c
-                    //     })
-                    // }
+                    if (json.status === "Success") {
+                        console.log(json.status)
+                    }
+                    router.push("/success");
                 } catch (error) {
                     console.error("Error:", error);
+                    router.push("/success");
                 }
-
             }
         }
-
-        setProcessSelfie(false)
-
     }
 
     const removeStream = () => {
@@ -182,6 +243,10 @@ export default function Activate() {
             })
             if (video.current) {
                 video.current.srcObject = stream.current;
+                // Запускаем воспроизведение видео и отрисовку на canvas
+                video.current.addEventListener('play', () => {
+                    drawVideo();
+                });
                 video.current.play();
             }
         } catch (error) {
@@ -221,9 +286,11 @@ export default function Activate() {
                 setProcessSelfie(true)
             }}>Загрузить фото</RedButton>
             <div className={`fixed inset-0 ${processSelfie ? `` : `hidden`}`}>
-                <video ref={video} className="bg-black w-full h-full"></video>
-                <canvas ref={canvas} className="hidden" ></canvas>
-                <button className="absolute bottom-4 left-1/2 -translate-x-1/2 w-[59px] h-[59px] shrink-0 flex items-center justify-center rounded-full border-4 border-white" onClick={e => takeSelfie(e)}>
+                <video controls={false} ref={video} className="w-full h-full pointer-events-none hidden -scale-x-100"></video>
+                <div className="bg-black inset-0 absolute z-10 flex items-center justify-center">
+                    <canvas className="" ref={canvas}></canvas>
+                </div>
+                <button className="z-10 absolute bottom-4 left-1/2 -translate-x-1/2 w-[59px] h-[59px] shrink-0 flex items-center justify-center rounded-full border-4 border-white" onClick={e => takeSelfie(e)}>
                     <div className="w-[45px] h-[45px] bg-white rounded-full border-4"></div>
                 </button>
             </div>

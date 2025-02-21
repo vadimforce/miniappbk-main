@@ -14,6 +14,7 @@ import pair9 from '../images/game1/9.png';
 import pair10 from '../images/game1/10.png';
 import cardBack from '../images/pairClose.png';
 import OrangeButton from '../components/OrangeButton';
+import { useRouter } from "next/navigation";
 
 // Тип для карточки
 type Card = {
@@ -33,6 +34,9 @@ const levels = [
 ];
 
 export default function Home() {
+
+  const router = useRouter();
+
   // Все картинки
   const allImages = [
     pair1,
@@ -76,6 +80,29 @@ export default function Home() {
       }))
       .sort(() => Math.random() - 0.5); // Перемешиваем карточки
   };
+
+
+  useEffect(() => {
+    if (isWin) {
+      fetch('https://a4-box.ru/profile/game1', {
+        method: "POST",
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          initData: window.Telegram?.WebApp?.initData
+        })
+      });
+      router.push("/win")
+    }
+  }, [isWin]);
+
+  useEffect(() => {
+    if (isGameOver) {
+      router.push("/gameover")
+    }
+  }, [isGameOver]);
 
   // Инициализация игры
   useEffect(() => {
@@ -200,19 +227,6 @@ export default function Home() {
 
     </div>
     <div>
-
-      {/* Сообщения */}
-      {isWin && (
-        <div className="text-[#1e1f1f] text-center text-[20px] font-bold font-druk leading-none">
-          Поздравляем! Ты прошёл игру!
-        </div>
-      )}
-      {isGameOver && (
-        <div className="text-[#1e1f1f] text-center text-[20px] font-bold font-druk leading-none">
-          Время вышло! Игра окончена.
-        </div>
-      )}
-
       {/* Кнопка сброса */}
       <OrangeButton
         onClick={resetGame}

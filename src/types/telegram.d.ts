@@ -13,6 +13,8 @@ declare global {
                         username?: string;
                     };
                 };
+                shareMessage: (id: string) => void;
+                sendData: (text: string) => void;
                 ready: () => void;
                 expand: () => void;
                 close: () => void;

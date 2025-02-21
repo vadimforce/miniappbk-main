@@ -1,6 +1,6 @@
 'use client'
 
-import RedButton from "../components/RedButton";
+// import RedButton from "../components/RedButton";
 import ach1 from '../images/ach1.png'
 import ach2 from '../images/ach2.png'
 import ach3 from '../images/ach3.png'
@@ -38,6 +38,9 @@ export default function Achievments() {
                         'Accept': 'application/json',
                         'Content-Type': 'application/json'
                     },
+                    body: JSON.stringify({
+                        initData: window.Telegram?.WebApp?.initData
+                    }),
                 });
                 const json = await response.json();
                 if (json.status === "Success") {
@@ -175,6 +178,20 @@ export default function Achievments() {
                 )}
             </ul >
         </div>
-        <RedButton className="w-full">Поделиться</RedButton>
+        {/* <RedButton className="w-full" onClick={e => {
+            e.preventDefault()
+            // const textToShare = "Я уже начал собирать ачивки с челобриками, присоединяйся ко мне:";
+            // const linkToShare = "https://t.me/A4Box_bot"; // Ваша ссылка
+            // // Формируем сообщение с текстом и ссылкой
+            // const message = `${textToShare}\n\n${linkToShare}`;
+            // Проверка, доступен ли Telegram Web App API
+            if (window.Telegram?.WebApp) {
+                try {
+                    window.Telegram.WebApp.shareMessage('11');
+                } catch (e) {
+                    alert(e)
+                }
+            }
+        }}>Поделиться</RedButton> */}
     </div>
 }

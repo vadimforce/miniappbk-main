@@ -3,23 +3,27 @@
 import { usePathname } from 'next/navigation';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { useEffect } from 'react';
 
-const Header= () => {
+const Header = () => {
 
     const router = useRouter()
     const pathname = usePathname()
-    console.log(pathname === '/')
 
-    return <header className={`bg-[#f5ebdc] h-[80px] py-5 shrink-0` }>
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [pathname]);
+
+    return pathname === '/' ? <></> : <header className={`bg-[#f5ebdc] h-[80px] py-5 shrink-0`}>
         <div className="container">
             <div className="flex items-center justify-between gap-5">
                 <div className="flex items-center gap-5">
-                    {pathname === '/' ? <></> : <Link href="#" onClick={() => router.back()}>
+                    <Link href="#" onClick={() => router.back()}>
                         <svg width="29" height="29" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <rect x="1.48526" y="12.7279" width="20" height="2" rx="1" transform="rotate(45 1.48526 12.7279)" fill="#87604F" />
                             <rect x="0.0710449" y="14.1422" width="20" height="2" rx="1" transform="rotate(-45 0.0710449 14.1422)" fill="#87604F" />
                         </svg>
-                    </Link>}
+                    </Link>
                     <Link href="/">
                         <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M35.4215 37.8012C32.3921 39.5112 27.1951 40 20.006 40C12.8168 40 7.61977 39.5112 4.59044 37.8012C2.77222 36.7773 1.85185 35.3813 1.85185 34.3805C1.85185 33.8105 2.1551 33.4846 2.83037 33.4846H37.1809C37.8568 33.4846 38.1594 33.8105 38.1594 34.3805C38.1601 35.3813 37.2397 36.7773 35.4215 37.8012ZM37.1809 11.2739H2.83037C2.1551 11.2739 1.85185 10.9249 1.85185 10.2969C1.85185 6.57343 7.45658 0 20.006 0C32.439 0 38.1601 6.57343 38.1601 10.2969C38.1601 10.9249 37.8568 11.2739 37.1809 11.2739Z" fill="#FF8732" />

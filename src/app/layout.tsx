@@ -21,9 +21,9 @@ export default function RootLayout({
       console.log("Telegram WebApp SDK загружен");
 
       if (window.Telegram?.WebApp) {
-        const tg = window.Telegram.WebApp;
-        tg.expand(); // Разворачиваем WebApp на весь экран
-        tg.enableClosingConfirmation(); // Включаем подтверждение выхода
+        // const tg = window.Telegram.WebApp;
+        // tg.expand(); // Разворачиваем WebApp на весь экран
+        // tg.enableClosingConfirmation(); // Включаем подтверждение выхода
       }
     };
 

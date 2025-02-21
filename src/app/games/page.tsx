@@ -11,13 +11,10 @@ export default function Games() {
             </div>
             <div className="flex flex-col gap-[10px]">
                 <Link href="/findPair"><OrangeButton className="w-full">Найди пару</OrangeButton></Link>
-                <Link href="/popBurgers"><OrangeButton className="w-full">Лопай бургеры</OrangeButton></Link>
+                <Link href="/popBurgers"><OrangeButton className="w-full" disabled={true}>Лопай бургеры</OrangeButton></Link>
             </div>
             <div className="mt-[37px] -mx-10">
-                <img
-                    src={gamesImg.src}
-                    alt=""
-                />
+                <img src={gamesImg.src} alt="" />
             </div>
         </div >
     )
