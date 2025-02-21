@@ -53,7 +53,7 @@ export default function Activate() {
         {
             rows: 1,
             name: "РИВИ В БУРГЕР КИНГ",
-            bg: "#76CAE5",
+            bg: "#EA5045",
             img: rivi,
             active: false,
             match: "Риви в Бургер Кинге!"
@@ -61,7 +61,7 @@ export default function Activate() {
         {
             rows: 1,
             name: "РАБОТНИК ВЛАД",
-            bg: "#76CAE5",
+            bg: "#52AE32",
             img: vladworker,
             active: false,
             match: "Работник Влад!"
@@ -69,7 +69,7 @@ export default function Activate() {
         {
             rows: 1,
             name: "ВЛАД ПОЛИЦЕЙСКИЙ",
-            bg: "#76CAE5",
+            bg: "#FFCC1B",
             img: vladpoliceman,
             active: false,
             match: "Влад полицейский!"
@@ -77,7 +77,7 @@ export default function Activate() {
         {
             rows: 1,
             name: "КЛОУН-А4",
-            bg: "#76CAE5",
+            bg: "#F28A3D",
             img: a4clown,
             active: false,
             match: "Клоун-А4!"
@@ -85,7 +85,7 @@ export default function Activate() {
         {
             rows: 1,
             name: "КРАСОТКА РИВИ",
-            bg: "#76CAE5",
+            bg: "#FFCC1B",
             img: rivi2,
             active: false,
             match: "Красотка Риви!"
@@ -109,7 +109,7 @@ export default function Activate() {
         {
             rows: 1,
             name: "МАРК",
-            bg: "#76CAE5",
+            bg: "#52AE32",
             img: mark,
             active: false,
             match: "Марк!"

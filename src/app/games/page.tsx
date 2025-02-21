@@ -10,8 +10,8 @@ export default function Games() {
                 Игры
             </div>
             <div className="flex flex-col gap-[10px]">
-                <Link href="/findPair"><OrangeButton className="w-full">Найди пару</OrangeButton></Link>
-                <Link href="/popBurgers"><OrangeButton className="w-full">Лопай бургеры</OrangeButton></Link>
+                <Link href="/find-pair"><OrangeButton className="w-full">Найди пару</OrangeButton></Link>
+                <Link href="/pop-burgers"><OrangeButton className="w-full">Лопай бургеры</OrangeButton></Link>
             </div>
             <div className="mt-[37px] -mx-10">
                 <img src={gamesImg.src} alt="" />

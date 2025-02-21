@@ -3,12 +3,14 @@
 import "./globals.css";
 import Header from "./components/Header";
 import { useEffect } from "react";
+import { usePathname } from "next/navigation";
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const pathname = usePathname()
 
   useEffect(() => {
 
@@ -21,6 +23,7 @@ export default function RootLayout({
       console.log("Telegram WebApp SDK загружен");
 
       if (window.Telegram?.WebApp) {
+        console.log(window.Telegram)
         // const tg = window.Telegram.WebApp;
         // tg.expand(); // Разворачиваем WebApp на весь экран
         // tg.enableClosingConfirmation(); // Включаем подтверждение выхода
@@ -39,7 +42,7 @@ export default function RootLayout({
       >
         <div className=" min-w-[375px] max-w-[475px] mx-auto relative flex flex-col min-h-screen">
           <Header />
-          <div className="container py-5 flex flex-col grow">
+          <div className={`container ${pathname.indexOf("/pop-burgers") > -1 ? `` : `py-5`} flex flex-col grow`}>
             {children}
           </div>
         </div>
